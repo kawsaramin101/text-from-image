@@ -69,7 +69,7 @@
     <div class="center">
         <div>
             <label for="language">language :</label>
-            <select name="language" id="language">
+            <select name="language" id="language" style="width: 200px;">
                 {#each languages as language}
                     <option value={language.value}>{language.name}</option>
                 {/each}
@@ -78,10 +78,10 @@
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div on:drop={handleDrop} on:dragleave={handleDragLeave} on:dragover={handleDragOver} class="uploadContainer" class:active={isDropAreaActive} aria-dropeffect="copy">
                 <img height="70px" width="70px" src="/svgs/cloud-arrow-up-light.svg" alt="Cloud arrow up" />
+                <span class="drag-file">{dragStatus}</span>
                 <header class="header">
-                    <span class="drag-file">{dragStatus}</span> or <br />
                     <span class="mt">
-                        <button class="file-input-button" on:click={() => fileInput.click()}> select a file </button>
+                        or <button class="file-input-button" on:click={() => fileInput.click()}> select a file </button>
                         from your device
                     </span>
                 </header>
@@ -89,49 +89,31 @@
                 <input on:change={handleInputChange} bind:this={fileInput} type="file" class="file-input" hidden />
             </div>
 
-            <br />
             {#if isProcessing}
                 Loading...
             {/if}
-            <br />
+
             <textarea id="textarea" spellcheck="false">{output}</textarea>
         </div>
     </div>
 </main>
 
 <style>
-    :global(body) {
-        background-color: #121212;
-        color: #fff;
-        margin: 0;
-        padding: 0;
-    }
-
     main {
         padding: 20px;
     }
 
-    input[type="file"] {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        /* width: 100%; */
-        max-width: 400px;
-    }
-
     textarea {
-        background-color: #333;
+        background-color: #222222;
         color: #fff;
         padding: 10px;
-        border: none;
+        border: 1px solid #dcdcdc;
         border-radius: 5px;
         resize: vertical;
         width: 100%;
-        max-width: 400px;
+        /* max-width: 400px; */
         height: 200px;
+        margin-top: 1rem;
     }
     .center {
         display: flex;
@@ -143,16 +125,17 @@
         flex: 1;
         flex-direction: column;
         align-items: center;
-        padding: 0.75rem;
+        padding: 0.25rem;
         margin-top: 1rem;
         border-width: 2px;
         border-style: dotted;
         border-color: #d2d6dc;
         border-radius: 0.5rem;
+        width: 100%;
     }
 
     .header {
-        margin-top: 1.5rem;
+        margin-top: 0.5rem;
     }
 
     .drag-file {
@@ -176,7 +159,7 @@
     }
 
     .small-text {
-        margin-top: 3rem;
+        margin-top: 1rem;
         color: #a0aec0;
         font-size: 0.875rem;
     }
