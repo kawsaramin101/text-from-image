@@ -1,4 +1,5 @@
 <script>
+    import "./styles.css";
     import { page } from "$app/stores";
 </script>
 
